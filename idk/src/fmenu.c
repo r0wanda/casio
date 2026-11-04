@@ -8,17 +8,18 @@ struct fmenu *fmenuAdd(struct fmenu *menu, const char *text, void (*cb)(struct f
     if (menu == NULL) {
         nMenu->fN = 1;
         return nMenu;
-    } else {
-        struct fmenu *m = menu;
-        int i = 1;
-        while (m->next != NULL) {
-            m = menu->next;
-            i++;
-        }
-        nMenu->fN = i;
-        m->next = nMenu;
-        return menu;
     }
+    
+    struct fmenu *m = menu;
+    int i = 1;
+    // FIXME
+    while (m->next != NULL) {
+        m = menu->next;
+        i++;
+    }
+    nMenu->fN = i;
+    m->next = nMenu;
+    return menu;
 }
 void fmenuFree(struct fmenu *menu) {
     struct fmenu *next;
@@ -26,4 +27,8 @@ void fmenuFree(struct fmenu *menu) {
         next = menu->next;
         free(menu);
     } while (next != NULL);
+}
+void fmenuDraw(struct fmenu *menu) {
+    struct fmenu *m = menu;
+    while (m != NULL) {}
 }
